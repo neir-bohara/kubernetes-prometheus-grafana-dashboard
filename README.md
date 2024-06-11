@@ -81,5 +81,52 @@ kubectl port-forward svc/grafana -n monitoring 80:8080
 
 
 ![Alt text](k8s-views-nodes.png?raw=true "k8s-views-nodes")
+![Alt text](k8s-views-nodes-2.png?raw=true "k8s-views-nodes")
+![Alt text](k8s-views-nodes-5.png?raw=true "k8s-views-nodes")
+
+## Kubernetes/Views/Pods (ID: 15760)
+
+- Detailed view of pods & containers
+- CPU & RAM usage and configuration of containers
+- View resources requests & limits
+- Track network utilization of the pods
+
+- Pod information: Created by, running on node, Pod IP
+- Real, Requests & Limits resources usage of k8s Namespace
+- CPU & RAM Requests & Limits of the pods
+- Network usage of the pods
+
+![Alt text](k8s-views-pods.png?raw=true "k8s-views-pods")
+![Alt text](k8s-views-pods-2.png?raw=true "k8s-views-pods")
+
+## Nginx-Ingress For Grafana Dashboard
+
+```terminal
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: monitor-production
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+        - monitor.example.com
+      secretName: ssl-2024
+  rules:
+    - host: monitor.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 80
+```
+
+
 
 
