@@ -113,7 +113,7 @@ spec:
   tls:
     - hosts:
         - monitor.example.com
-      secretName: ssl-2024
+      secretName: ssl-secret
   rules:
     - host: monitor.example.com
       http:
